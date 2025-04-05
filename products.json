@@ -33,19 +33,5 @@
     "description": "일회용 비닐봉투를 대체할 수 있는 재사용 가방",
     "category": "패션/소품",
     "url": "https://example.com/ecobag"
-  },
-  {
-    "id": 6,
-    "name": "천연 비누",
-    "description": "화학 성분 없는 피부 친화적인 천연 성분 비누",
-    "category": "욕실용품",
-    "url": "https://example.com/soap"
-  },
-  {
-    "id": 7,
-    "name": "재사용 가능한 밀랍 랩",
-    "description": "식품 보관용 친환경 대체 랩",
-    "category": "주방용품",
-    "url": "https://example.com/beeswaxwrap"
   }
 ]
