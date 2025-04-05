@@ -1,76 +1,51 @@
 let products = [];
 
 async function loadProducts() {
-  const response = await fetch('products.json');
-  products = await response.json();
-  renderCategoryOptions(products);
+  const res = await fetch('products.json');
+  products = await res.json();
   renderProducts(products);
 }
 
-function renderCategoryOptions(products) {
-  const categories = new Set(products.map(p => p.category));
-  const filter = document.getElementById('categoryFilter');
-  categories.forEach(cat => {
-    const option = document.createElement('option');
-    option.value = cat;
-    option.textContent = cat;
-    filter.appendChild(option);
-  });
-}
-
 function getSourceLabel(url) {
-  try {
-    const hostname = new URL(url).hostname;
-    if (hostname.includes('naver')) return '네이버';
-    if (hostname.includes('coupang')) return '쿠팡';
-    if (hostname.includes('smartstore')) return '스마트스토어';
-    if (hostname.includes('gmarket')) return '지마켓';
-    if (hostname.includes('11st')) return '11번가';
-    return ''; // 표시 안 함
-  } catch {
-    return '';
-  }
+  const domain = new URL(url).hostname;
+  if (domain.includes("naver")) return "[네이버]";
+  if (domain.includes("coupang")) return "[쿠팡]";
+  if (domain.includes("11st")) return "[11번가]";
+  if (domain.includes("gmarket")) return "[지마켓]";
+  return "";
 }
 
 function renderProducts(list) {
   const container = document.getElementById('productContainer');
   container.innerHTML = '';
   list.forEach(product => {
-    const source = getSourceLabel(product.url);
+    const sourceLabel = getSourceLabel(product.url);
     container.innerHTML += `
       <div class="product">
-        <div class="product-content">
+        <img src="${product.image || 'https://via.placeholder.com/80'}" alt="${product.name}">
+        <div class="product-details">
           <h2>${product.name}</h2>
           <p>${product.description}</p>
-          <a class="buy" href="${product.url}" target="_blank">
-            구매하러 가기 ${source ? `<span style="font-weight: normal;">[${source}]</span>` : ''}
-          </a>
+          <a class="buy" href="${product.url}" target="_blank">구매하러 가기</a>
+          <span class="source-label">${sourceLabel}</span>
         </div>
-        ${product.image ? `<img src="${product.image}" alt="${product.name}" />` : ''}
       </div>
     `;
   });
 }
 
-document.getElementById('searchInput').addEventListener('input', (e) => {
-  filterAndRender();
-});
-
-document.getElementById('categoryFilter').addEventListener('change', () => {
-  filterAndRender();
-});
-
-function filterAndRender() {
-  const keyword = document.getElementById('searchInput').value.toLowerCase();
-  const selectedCategory = document.getElementById('categoryFilter').value;
-
-  const filtered = products.filter(p => {
-    const matchName = p.name.toLowerCase().includes(keyword);
-    const matchCategory = selectedCategory === 'all' || p.category === selectedCategory;
-    return matchName && matchCategory;
-  });
-
+document.getElementById('searchInput').addEventListener('input', e => {
+  const keyword = e.target.value.toLowerCase();
+  const filtered = products.filter(p => p.name.toLowerCase().includes(keyword));
   renderProducts(filtered);
-}
+});
+
+document.querySelectorAll('#categoryFilter button').forEach(button => {
+  button.addEventListener('click', () => {
+    const category = button.getAttribute('data-category');
+    const filtered = category === '전체' ? products : products.filter(p => p.category === category);
+    renderProducts(filtered);
+  });
+});
 
 loadProducts();
