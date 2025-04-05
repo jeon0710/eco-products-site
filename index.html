@@ -1,50 +1,20 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>친환경 제품 추천</title>
+  <meta charset="UTF-8" />
+  <title>친환경 제품 소개</title>
   <style>
-    body { font-family: sans-serif; background: #f0fdf4; color: #1f2937; padding: 20px; }
-    .product { background: #fff; padding: 16px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #ccc; }
-    .buy-btn { background: #10b981; color: white; padding: 8px 12px; border: none; border-radius: 4px; text-decoration: none; }
+    body { font-family: sans-serif; background: #f0fdf4; padding: 20px; }
+    .product { background: #fff; padding: 16px; margin-bottom: 12px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .buy { background: #10b981; color: white; padding: 8px 12px; border: none; border-radius: 4px; text-decoration: none; }
   </style>
 </head>
 <body>
-  <h1>🌿 친환경 제품 추천</h1>
+  <h1>🌿 친환경 제품 소개</h1>
   <input type="text" id="searchInput" placeholder="제품 이름 검색..." />
-
   <div id="productContainer"></div>
 
-  <script>
-    let products = [];
-
-    async function fetchProducts() {
-      const response = await fetch("products.json");
-      products = await response.json();
-      renderProducts(products);
-    }
-
-    function renderProducts(list) {
-      const container = document.getElementById("productContainer");
-      container.innerHTML = "";
-      list.forEach(product => {
-        container.innerHTML += `
-          <div class="product">
-            <h2>${product.name}</h2>
-            <p>${product.description}</p>
-            <a class="buy-btn" href="${product.url}" target="_blank">구매하러 가기</a>
-          </div>
-        `;
-      });
-    }
-
-    document.getElementById("searchInput").addEventListener("input", e => {
-      const keyword = e.target.value.toLowerCase();
-      const filtered = products.filter(p => p.name.toLowerCase().includes(keyword));
-      renderProducts(filtered);
-    });
-
-    fetchProducts();
-  </script>
+  <script src="main.js"></script>
 </body>
 </html>
