@@ -1,0 +1,17 @@
+[
+    {
+      "id": 1,
+      "name": "대나무 칫솔",
+      "description": "자연 분해가 가능한 대체 칫솔",
+      "category": "욕실",
+      "url": "https://example.com/toothbrush"
+    },
+    {
+      "id": 2,
+      "name": "천연 수세미",
+      "description": "플라스틱 제로 수세미",
+      "category": "주방",
+      "url": "https://example.com/sponge"
+    }
+  ]
+  
