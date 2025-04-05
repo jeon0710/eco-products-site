@@ -2,188 +2,30 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>🌿 친환경 제품 소개</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f0fdf4;
-      margin: 0;
-      padding: 0;
-    }
-
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 40px;
-      background: #10b981;
-      color: white;
-    }
-
-    .header h1 {
-      margin: 0;
-      font-size: 28px;
-    }
-
-    .header input {
-      padding: 8px;
-      border-radius: 6px;
-      border: none;
-      font-size: 14px;
-    }
-
-    nav.menu {
-      background: #d1fae5;
-      padding: 10px 40px;
-    }
-
-    .main-menu {
-      list-style: none;
-      display: flex;
-      gap: 40px;
-      padding: 0;
-      margin: 0;
-    }
-
-    .main-menu > li {
-      position: relative;
-      cursor: pointer;
-    }
-
-    .sub-menu {
-      display: none;
-      position: absolute;
-      background: white;
-      border: 1px solid #ccc;
-      padding: 10px;
-      top: 25px;
-      left: 0;
-      border-radius: 6px;
-      z-index: 10;
-    }
-
-    .main-menu > li:hover .sub-menu {
-      display: block;
-      animation: fadeIn 0.3s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .filter {
-      display: flex;
-      gap: 10px;
-      padding: 20px 40px;
-    }
-
-    .filter button {
-      background: #34d399;
-      color: white;
-      padding: 8px 12px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .container {
-      padding: 20px 40px;
-    }
-
-    .product {
-    background: white;
-    padding: 16px;
-    margin-bottom: 16px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .product img {
-    width: 80px;
-    height: 80px;
-    border-radius: 8px;
-    object-fit: cover;
-    transition: all 0.3s ease;
-    z-index: 1;
-  }
-
-    /* 확대된 이미지 스타일 */
-    .product:hover img {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 300px;
-      height: 300px;
-      transform: translate(-50%, -50%);
-      opacity: 0.9;
-      z-index: 10;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      border-radius: 12px;
-    }
-
-
-    .product-details {
-      flex-grow: 1;
-    }
-
-    .buy {
-      background: #10b981;
-      color: white;
-      padding: 8px 12px;
-      border: none;
-      border-radius: 4px;
-      text-decoration: none;
-      font-size: 14px;
-      margin-top: 6px;
-      display: inline-block;
-    }
-
-    .source-label {
-      font-size: 12px;
-      color: #555;
-      margin-left: 8px;
-    }
-  </style>
+  <title>친환경 제품 소개</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="header">
+  <header class="top-bar">
     <h1>🌿 친환경 제품 소개</h1>
     <input type="text" id="searchInput" placeholder="제품 이름 검색..." />
   </header>
 
-  <nav class="menu">
-    <ul class="main-menu">
-      <li>
+  <nav class="main-nav">
+    <ul class="menu">
+      <li class="menu-item">
         사업 소개
-        <ul class="sub-menu">
-          <li>팀 소개</li>
-          <li>프로젝트 소개</li>
-        </ul>
+        <div class="submenu">
+          <a href="#">팀 소개</a>
+          <a href="#">구매 목록 가기</a>
+          <a href="#">프로젝트 소개</a>
+        </div>
       </li>
-      <li>
-        구매하러 가기
-        <ul class="sub-menu">
-          <li>구매 목록 보기</li>
-        </ul>
-      </li>
+      <li class="menu-item"><a href="#products">구매하러 가기</a></li>
     </ul>
   </nav>
 
-  <div id="categoryFilter" class="filter">
-    <button data-category="전체">전체</button>
-    <button data-category="욕실용품">욕실용품</button>
-    <button data-category="주방용품">주방용품</button>
-    <button data-category="문구류">문구류</button>
-    <button data-category="패션/소품">패션/소품</button>
-  </div>
-
-  <div id="productContainer" class="container"></div>
+  <main id="products" class="product-container"></main>
 
   <script src="main.js"></script>
 </body>

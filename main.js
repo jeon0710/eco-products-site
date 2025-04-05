@@ -1,51 +1,44 @@
 let products = [];
 
 async function loadProducts() {
-  const res = await fetch('products.json');
-  products = await res.json();
+  const response = await fetch('products.json');
+  products = await response.json();
   renderProducts(products);
 }
 
-function getSourceLabel(url) {
-  const domain = new URL(url).hostname;
-  if (domain.includes("naver")) return "[네이버]";
-  if (domain.includes("coupang")) return "[쿠팡]";
-  if (domain.includes("11st")) return "[11번가]";
-  if (domain.includes("gmarket")) return "[지마켓]";
-  return "";
+function getDomainLabel(url) {
+  try {
+    const host = new URL(url).hostname;
+    if (host.includes("naver")) return "[네이버]";
+    if (host.includes("coupang")) return "[쿠팡]";
+    if (host.includes("smartstore")) return "[스마트스토어]";
+    if (host.includes("amazon")) return "[아마존]";
+    return "";
+  } catch {
+    return "";
+  }
 }
 
 function renderProducts(list) {
-  const container = document.getElementById('productContainer');
+  const container = document.getElementById('products');
   container.innerHTML = '';
   list.forEach(product => {
-    const sourceLabel = getSourceLabel(product.url);
+    const domainLabel = getDomainLabel(product.url);
     container.innerHTML += `
       <div class="product">
-        <img src="${product.image || 'https://via.placeholder.com/80'}" alt="${product.name}">
-        <div class="product-details">
-          <h2>${product.name}</h2>
-          <p>${product.description}</p>
-          <a class="buy" href="${product.url}" target="_blank">구매하러 가기</a>
-          <span class="source-label">${sourceLabel}</span>
-        </div>
+        <h2>${product.name}</h2>
+        <p>${product.description}</p>
+        <a class="buy" href="${product.url}" target="_blank">구매하러 가기</a>
+        <span class="domain-tag">${domainLabel}</span>
       </div>
     `;
   });
 }
 
-document.getElementById('searchInput').addEventListener('input', e => {
+document.getElementById('searchInput').addEventListener('input', (e) => {
   const keyword = e.target.value.toLowerCase();
   const filtered = products.filter(p => p.name.toLowerCase().includes(keyword));
   renderProducts(filtered);
-});
-
-document.querySelectorAll('#categoryFilter button').forEach(button => {
-  button.addEventListener('click', () => {
-    const category = button.getAttribute('data-category');
-    const filtered = category === '전체' ? products : products.filter(p => p.category === category);
-    renderProducts(filtered);
-  });
 });
 
 loadProducts();
