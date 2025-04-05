@@ -4,6 +4,34 @@
     "name": "대나무 칫솔",
     "description": "자연 분해가 가능한 친환경 칫솔",
     "category": "욕실용품",
-    "url": "https://smartstore.naver.com/godome/products/8096202220"
+    "url": "https://example.com/toothbrush"
+  },
+  {
+    "id": 2,
+    "name": "천연 수세미",
+    "description": "플라스틱 없이 사용할 수 있는 친환경 수세미",
+    "category": "주방용품",
+    "url": "https://example.com/sponge"
+  },
+  {
+    "id": 3,
+    "name": "재사용 가능한 빨대",
+    "description": "스테인리스 소재로 만든 친환경 빨대",
+    "category": "주방용품",
+    "url": "https://example.com/straw"
+  },
+  {
+    "id": 4,
+    "name": "친환경 노트",
+    "description": "재생 용지로 만들어진 환경을 생각한 노트",
+    "category": "문구류",
+    "url": "https://example.com/notebook"
+  },
+  {
+    "id": 5,
+    "name": "천 가방 (에코백)",
+    "description": "일회용 비닐봉투를 대체할 수 있는 재사용 가방",
+    "category": "패션/소품",
+    "url": "https://example.com/ecobag"
   }
 ]
