@@ -2,23 +2,149 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>친환경 제품 소개</title>
+  <title>🌿 친환경 제품 소개</title>
   <style>
-    body { font-family: sans-serif; background: #f0fdf4; padding: 20px; }
-    .product { background: #fff; padding: 16px; margin-bottom: 12px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-    .buy { background: #10b981; color: white; padding: 8px 12px; border: none; border-radius: 4px; text-decoration: none; }
-    .product img { max-width: 100px; border-radius: 8px; }
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0fdf4;
+      color: #111827;
+    }
+
+    header {
+      background: #10b981;
+      color: white;
+      padding: 20px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      flex: 1;
+      text-align: center;
+    }
+
+    #searchInput {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      margin-left: auto;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .filter-bar {
+      margin-bottom: 20px;
+      text-align: right;
+    }
+
+    #categoryFilter {
+      padding: 8px 12px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .product {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .product-content {
+      flex: 1;
+      margin-right: 20px;
+    }
+
+    .product h2 {
+      margin: 0 0 8px;
+      font-size: 1.3rem;
+    }
+
+    .product p {
+      margin: 0 0 12px;
+    }
+
+    .buy {
+      background: #10b981;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+
+    .buy:hover {
+      background: #059669;
+    }
+
+    .product img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+      }
+
+      .product {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .product img {
+        margin-top: 10px;
+      }
+
+      .filter-bar {
+        text-align: center;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>🌿 친환경 제품 소개</h1>
-  <input type="text" id="searchInput" placeholder="제품 이름 검색..." />
+  <header>
+    <h1>🌿 친환경 제품 소개</h1>
+    <input type="text" id="searchInput" placeholder="제품 이름 검색..." />
+  </header>
 
-  <select id="categoryFilter">
-    <option value="all">전체</option>
-  </select>
+  <main>
+    <div class="filter-bar">
+      <label for="categoryFilter">카테고리:</label>
+      <select id="categoryFilter">
+        <option value="all">전체</option>
+      </select>
+    </div>
 
-  <div id="productContainer"></div>
+    <div id="productContainer"></div>
+  </main>
 
   <script src="main.js"></script>
 </body>
