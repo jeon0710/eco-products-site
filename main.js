@@ -14,7 +14,7 @@ async function loadProducts() {
 }
 
 async function fetchLinkPreview(link) {
-  const apiKey = '여기에_API_KEY_입력'; // LinkPreview API 키 입력
+  const apiKey = '0b48ff8ee57b95221f701286669c43f9'; // LinkPreview API 키 입력
 
   try {
     const response = await fetch(`https://api.linkpreview.net/?key=${apiKey}&q=${encodeURIComponent(link)}`);
