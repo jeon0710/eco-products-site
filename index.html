@@ -49,6 +49,7 @@
       margin: 0;
       font-weight: bold;
       font-size: 18px;
+      position: relative;
     }
 
     .menu-item {
@@ -65,8 +66,8 @@
       position: absolute;
       top: 100%;
       left: 0;
-      width: 100%;
-      background: rgba(255, 255, 255, 0.96);
+      width: 100vw;
+      background: rgba(255, 255, 255, 0.9);
       border-top: 1px solid #ddd;
       display: flex;
       justify-content: center;
@@ -76,7 +77,7 @@
       opacity: 0;
       transition: all 0.3s ease;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(4px);
+      backdrop-filter: blur(6px);
     }
 
     .submenu a {
@@ -150,6 +151,7 @@
         사업 소개
         <div class="submenu">
           <a href="#">팀 소개</a>
+          <a href="#">구매 목록 가기</a>
           <a href="#">프로젝트 소개</a>
         </div>
       </li>
@@ -157,7 +159,9 @@
     </ul>
   </nav>
 
-  <main id="products" class="product-container"></main>
+  <main id="products" class="product-container">
+    <!-- JavaScript로 제품 목록이 여기에 표시됩니다 -->
+  </main>
 
   <script src="main.js"></script>
 </body>
