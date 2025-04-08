@@ -18,8 +18,8 @@
       padding: 20px 40px;
       background: white;
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-      z-index: 10;
       position: relative;
+      z-index: 10;
     }
 
     .top-bar h1 {
@@ -36,16 +36,17 @@
     }
 
     .main-nav {
-      position: relative;
       background: white;
-      z-index: 20;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      position: relative;
+      z-index: 10;
     }
 
     .menu {
       display: flex;
       justify-content: center;
-      gap: 40px;
       list-style: none;
+      gap: 40px;
       padding: 12px 0;
       margin: 0;
       font-weight: bold;
@@ -63,39 +64,28 @@
       color: inherit;
     }
 
-    /* 오버레이 */
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.4);
-      display: none;
-      z-index: 15;
-    }
-
     .submenu {
-      position: fixed;
-      top: 70px;
+      position: absolute;
+      top: 100%;
       left: 0;
-      width: 100vw;
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.98);
       display: flex;
       justify-content: center;
-      gap: 80px;
-      padding: 20px 0;
+      gap: 60px;
+      padding: 16px 24px;
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
       visibility: hidden;
       opacity: 0;
       transition: all 0.3s ease;
-      z-index: 30;
+      width: max-content;
     }
 
     .submenu a {
       color: #111;
       text-decoration: none;
       font-size: 16px;
-      padding: 10px 20px;
+      padding: 8px 12px;
       border-radius: 6px;
       transition: background 0.2s ease;
     }
@@ -108,6 +98,17 @@
     .menu-item:focus-within .submenu {
       visibility: visible;
       opacity: 1;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.4);
+      display: none;
+      z-index: 5;
     }
 
     .menu-item:hover ~ .overlay,
