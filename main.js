@@ -21,6 +21,7 @@ function getDomainLabel(url) {
 
 function renderProducts(list) {
   const container = document.getElementById('products');
+  if (!container) return;
   container.innerHTML = '';
   list.forEach(product => {
     const domainLabel = getDomainLabel(product.url);
@@ -35,10 +36,48 @@ function renderProducts(list) {
   });
 }
 
-document.getElementById('searchInput').addEventListener('input', (e) => {
-  const keyword = e.target.value.toLowerCase();
-  const filtered = products.filter(p => p.name.toLowerCase().includes(keyword));
-  renderProducts(filtered);
+document.addEventListener("DOMContentLoaded", () => {
+  loadProducts();
+
+  const searchInput = document.getElementById('searchInput');
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      const keyword = e.target.value.toLowerCase();
+      const filtered = products.filter(p => p.name.toLowerCase().includes(keyword));
+      renderProducts(filtered);
+    });
+  }
+
+  // team 섹션 해시 감지 및 로딩
+  if (window.location.hash === "#team") {
+    loadTeamSection();
+  }
+
+  document.querySelectorAll('a[href="#team"]').forEach(link => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      history.pushState(null, "", "#team");
+      loadTeamSection();
+    });
+  });
 });
 
-loadProducts();
+function loadTeamSection() {
+  fetch("team.html")
+    .then(res => res.text())
+    .then(html => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, "text/html");
+      const teamContent = doc.querySelector(".team-section");
+      const teamSection = document.getElementById("team");
+
+      if (teamContent && teamSection) {
+        teamSection.innerHTML = teamContent.innerHTML;
+        teamSection.style.display = "block";
+        window.scrollTo({ top: teamSection.offsetTop, behavior: "smooth" });
+      }
+    })
+    .catch(err => {
+      console.error("팀 섹션을 불러오는 데 실패했습니다:", err);
+    });
+}
