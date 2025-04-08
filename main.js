@@ -43,22 +43,9 @@ document.getElementById('searchInput').addEventListener('input', (e) => {
 
 loadProducts();
 
-// 🟢 주소에 따라 iframe 표시 여부 제어
-window.addEventListener('hashchange', () => {
-  const teamSection = document.getElementById('team');
-  const productSection = document.getElementById('products');
-
-  if (location.hash === '#team') {
-    teamSection.style.display = 'block';
-    productSection.style.display = 'none';
-  } else {
-    teamSection.style.display = 'none';
-    productSection.style.display = 'block';
-  }
-});
-
-// 첫 로딩 시 해시 처리
-if (location.hash === '#team') {
-  document.getElementById('team').style.display = 'block';
-  document.getElementById('products').style.display = 'none';
-}
+// 🔽 team.html을 불러와서 section에 삽입
+fetch('team.html')
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById('team').innerHTML = data;
+  });
