@@ -21,7 +21,6 @@ function getDomainLabel(url) {
 
 function renderProducts(list) {
   const container = document.getElementById('products');
-  if (!container) return;
   container.innerHTML = '';
   list.forEach(product => {
     const domainLabel = getDomainLabel(product.url);
@@ -36,48 +35,50 @@ function renderProducts(list) {
   });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  loadProducts();
-
-  const searchInput = document.getElementById('searchInput');
-  if (searchInput) {
-    searchInput.addEventListener('input', (e) => {
-      const keyword = e.target.value.toLowerCase();
-      const filtered = products.filter(p => p.name.toLowerCase().includes(keyword));
-      renderProducts(filtered);
-    });
-  }
-
-  // team 섹션 해시 감지 및 로딩
-  if (window.location.hash === "#team") {
-    loadTeamSection();
-  }
-
-  document.querySelectorAll('a[href="#team"]').forEach(link => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      history.pushState(null, "", "#team");
-      loadTeamSection();
-    });
-  });
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  const keyword = e.target.value.toLowerCase();
+  const filtered = products.filter(p => p.name.toLowerCase().includes(keyword));
+  renderProducts(filtered);
 });
 
-function loadTeamSection() {
-  fetch("team.html")
-    .then(res => res.text())
-    .then(html => {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, "text/html");
-      const teamContent = doc.querySelector(".team-section");
-      const teamSection = document.getElementById("team");
+loadProducts();
 
-      if (teamContent && teamSection) {
-        teamSection.innerHTML = teamContent.innerHTML;
-        teamSection.style.display = "block";
-        window.scrollTo({ top: teamSection.offsetTop, behavior: "smooth" });
-      }
-    })
-    .catch(err => {
-      console.error("팀 섹션을 불러오는 데 실패했습니다:", err);
-    });
+// 🟢 team.html의 .team-section 부분을 불러오는 함수
+async function loadTeamSection() {
+  try {
+    const response = await fetch('team.html');
+    const htmlText = await response.text();
+
+    // .team-section만 추출
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlText, 'text/html');
+    const teamContent = doc.querySelector('.team-section');
+
+    const teamSection = document.getElementById('team');
+    if (teamContent && teamSection) {
+      teamSection.innerHTML = teamContent.innerHTML;
+    }
+  } catch (error) {
+    console.error('팀 섹션 로드 실패:', error);
+  }
+}
+
+// #team으로 이동할 때만 섹션 로딩 및 표시
+window.addEventListener('hashchange', () => {
+  if (location.hash === '#team') {
+    const teamSection = document.getElementById('team');
+    if (teamSection.innerHTML.trim() === '') {
+      loadTeamSection();
+    }
+    teamSection.style.display = 'block';
+  } else {
+    document.getElementById('team').style.display = 'none';
+  }
+});
+
+// 페이지 처음 로드할 때도 처리
+if (location.hash === '#team') {
+  loadTeamSection().then(() => {
+    document.getElementById('team').style.display = 'block';
+  });
 }
