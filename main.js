@@ -43,42 +43,22 @@ document.getElementById('searchInput').addEventListener('input', (e) => {
 
 loadProducts();
 
-// 🟢 team.html의 .team-section 부분을 불러오는 함수
-async function loadTeamSection() {
-  try {
-    const response = await fetch('team.html');
-    const htmlText = await response.text();
-
-    // .team-section만 추출
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(htmlText, 'text/html');
-    const teamContent = doc.querySelector('.team-section');
-
-    const teamSection = document.getElementById('team');
-    if (teamContent && teamSection) {
-      teamSection.innerHTML = teamContent.innerHTML;
-    }
-  } catch (error) {
-    console.error('팀 섹션 로드 실패:', error);
-  }
-}
-
-// #team으로 이동할 때만 섹션 로딩 및 표시
+// 🟢 주소에 따라 iframe 표시 여부 제어
 window.addEventListener('hashchange', () => {
+  const teamSection = document.getElementById('team');
+  const productSection = document.getElementById('products');
+
   if (location.hash === '#team') {
-    const teamSection = document.getElementById('team');
-    if (teamSection.innerHTML.trim() === '') {
-      loadTeamSection();
-    }
     teamSection.style.display = 'block';
+    productSection.style.display = 'none';
   } else {
-    document.getElementById('team').style.display = 'none';
+    teamSection.style.display = 'none';
+    productSection.style.display = 'block';
   }
 });
 
-// 페이지 처음 로드할 때도 처리
+// 첫 로딩 시 해시 처리
 if (location.hash === '#team') {
-  loadTeamSection().then(() => {
-    document.getElementById('team').style.display = 'block';
-  });
+  document.getElementById('team').style.display = 'block';
+  document.getElementById('products').style.display = 'none';
 }
