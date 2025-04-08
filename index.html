@@ -18,6 +18,8 @@
       padding: 20px 40px;
       background: white;
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      z-index: 10;
+      position: relative;
     }
 
     .top-bar h1 {
@@ -36,8 +38,7 @@
     .main-nav {
       position: relative;
       background: white;
-      border-top: 1px solid #ddd;
-      z-index: 100;
+      z-index: 20;
     }
 
     .menu {
@@ -62,13 +63,24 @@
       color: inherit;
     }
 
-    .submenu {
-      position: absolute;
-      top: 100%;
+    /* 오버레이 */
+    .overlay {
+      position: fixed;
+      top: 0;
       left: 0;
       width: 100vw;
-      background: rgba(255, 255, 255, 0.9);
-      border-top: 1px solid #ddd;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.4);
+      display: none;
+      z-index: 15;
+    }
+
+    .submenu {
+      position: fixed;
+      top: 70px;
+      left: 0;
+      width: 100vw;
+      background: rgba(255, 255, 255, 0.95);
       display: flex;
       justify-content: center;
       gap: 80px;
@@ -76,8 +88,7 @@
       visibility: hidden;
       opacity: 0;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(6px);
+      z-index: 30;
     }
 
     .submenu a {
@@ -93,9 +104,15 @@
       background: #d1fae5;
     }
 
-    .menu-item:hover .submenu {
+    .menu-item:hover .submenu,
+    .menu-item:focus-within .submenu {
       visibility: visible;
       opacity: 1;
+    }
+
+    .menu-item:hover ~ .overlay,
+    .menu-item:focus-within ~ .overlay {
+      display: block;
     }
 
     .product-container {
@@ -140,6 +157,8 @@
   </style>
 </head>
 <body>
+  <div class="overlay"></div>
+
   <header class="top-bar">
     <h1>🌿 친환경 제품 소개</h1>
     <input type="text" id="searchInput" placeholder="제품 이름 검색..." />
@@ -147,7 +166,7 @@
 
   <nav class="main-nav">
     <ul class="menu">
-      <li class="menu-item">
+      <li class="menu-item" tabindex="0">
         사업 소개
         <div class="submenu">
           <a href="#">팀 소개</a>
