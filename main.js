@@ -21,7 +21,7 @@ function getDomainLabel(url) {
     if (host.includes("smartstore")) return "[스마트스토어]";
     if (host.includes("amazon")) return "[아마존]";
     if (host.includes("11st")) return "[11번가]";
-    if (host.includes("auction")) return "[옥션션]";
+    if (host.includes("auction")) return "[옥션]";
     return "";
   } catch {
     return "";
