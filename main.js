@@ -49,3 +49,21 @@ fetch('team.html')
   .then(data => {
     document.getElementById('team').innerHTML = data;
   });
+
+  function renderProducts(list) {
+    const container = document.getElementById('products');
+    container.innerHTML = '';
+    list.forEach((product, index) => {
+      const domainLabel = getDomainLabel(product.url);
+      const delay = 0.2 * index;
+      container.innerHTML += `
+        <div class="product" style="animation-delay: ${delay}s;">
+          <h2>${product.name}</h2>
+          <p>${product.description}</p>
+          <a class="buy" href="${product.url}" target="_blank">구매하러 가기</a>
+          <span class="domain-tag">${domainLabel}</span>
+        </div>
+      `;
+    });
+  }
+  

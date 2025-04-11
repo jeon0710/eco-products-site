@@ -1,5 +1,12 @@
+@font-face {
+  font-family: 'GmarketSans';
+  src: url('GmarketSansTTFMedium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'GmarketSans', sans-serif;
     background: #f0fdf4;
     margin: 0;
     padding: 0;
@@ -156,4 +163,56 @@ body {
     font-size: 14px;
     color: #666;
   }
+
+  /* 공통 Fade-in 애니메이션 */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* header, nav, footer 등장 시 애니메이션 */
+.top-bar,
+.main-nav,
+footer {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* 각 product에 애니메이션 추가 */
+.product {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* 순차 등장 (나중에 JS에서 delay 줌) */
+.product:nth-child(1) { animation-delay: 0.2s; }
+.product:nth-child(2) { animation-delay: 0.4s; }
+.product:nth-child(3) { animation-delay: 0.6s; }
+/* 필요한 만큼 계속 추가 가능 */
+
+/* 버튼 hover 애니메이션 */
+.buy {
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+.buy:hover {
+  transform: scale(1.05);
+  background-color: #059669;
+}
+
+/* 메뉴 hover 시 슬라이드 애니메이션 */
+.submenu {
+  transition: all 0.3s ease;
+  transform: translateY(10px);
+}
+.menu-item:hover .submenu,
+.menu-item:focus-within .submenu {
+  transform: translateY(0);
+}
+
   
