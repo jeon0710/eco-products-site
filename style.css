@@ -215,4 +215,18 @@ footer {
   transform: translateY(0);
 }
 
+.search-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#categorySelect {
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+
   

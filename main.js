@@ -5,22 +5,12 @@ async function loadProducts() {
   const response = await fetch('products.json');
   products = await response.json();
 
-  // 카테고리 추출 및 드롭다운 추가
-  categories = new Set(products.map(p => p.category));
-  updateCategorySelect();
-
-  renderProducts(products);
-}
-
-function updateCategorySelect() {
-  const select = document.getElementById('categorySelect');
-  select.innerHTML = `<option value="all">전체 카테고리</option>`;
-  categories.forEach(category => {
-    const option = document.createElement('option');
-    option.value = category;
-    option.textContent = category;
-    select.appendChild(option);
+  products.forEach(p => {
+    if (p.category) categories.add(p.category);
   });
+
+  populateCategorySelect();
+  renderProducts(products);
 }
 
 function getDomainLabel(url) {
@@ -53,23 +43,33 @@ function renderProducts(list) {
   });
 }
 
-function filterProducts() {
+function populateCategorySelect() {
+  const select = document.getElementById('categorySelect');
+  categories.forEach(cat => {
+    const option = document.createElement('option');
+    option.value = cat;
+    option.textContent = cat;
+    select.appendChild(option);
+  });
+}
+
+function filterAndRender() {
   const keyword = document.getElementById('searchInput').value.toLowerCase();
   const selectedCategory = document.getElementById('categorySelect').value;
 
   const filtered = products.filter(p => {
     const nameMatch = p.name.toLowerCase().includes(keyword);
-    const categoryMatch = selectedCategory === 'all' || p.category === selectedCategory;
+    const categoryMatch = selectedCategory === "" || p.category === selectedCategory;
     return nameMatch && categoryMatch;
   });
 
   renderProducts(filtered);
 }
 
-document.getElementById('searchInput').addEventListener('input', filterProducts);
-document.getElementById('categorySelect').addEventListener('change', filterProducts);
+document.getElementById('searchInput').addEventListener('input', filterAndRender);
+document.getElementById('categorySelect').addEventListener('change', filterAndRender);
 
-// team.html을 #team 섹션에 삽입
+// 🔽 team.html을 섹션에 삽입
 fetch('team.html')
   .then(response => response.text())
   .then(data => {
