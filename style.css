@@ -150,3 +150,13 @@ body {
     border-radius: 4px;
   }
   
+  footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #f4f4f4; /* 배경색은 원하시면 바꾸셔도 됩니다 */
+    font-size: 14px;
+    color: #333;
+    margin-top: 2rem;
+  }
+  
+  
