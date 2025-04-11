@@ -5,17 +5,33 @@
   <title>팀 소개</title>
   <link rel="stylesheet" href="team-style.css" />
 </head>
+
 <body>
-  <header>
-    <h1>우리 동아리를 소개합니다</h1>
-    <p>연수구 청소년 수련관 소속의 동아리 청소년 의회'US'가 만든 환경을 위한 홈패이지!!</p>
+  <header class="top-bar">
+    <h1>
+      <a href="#" onclick="scrollToTop()" style="text-decoration: none; color: inherit;">
+        🌿 친환경 제품 소개
+      </a>
+    </h1>
   </header>
 
+  <section class="intro">
+    <h2>우리 동아리를 소개합니다</h2>
+    <p>연수구 청소년 수련관 소속의 동아리 청소년 의회 'US'가 만든 환경을 위한 홈페이지입니다!</p>
+  </section>
+
   <section class="team-section">
+    <!-- 팀원 소개 등 내용은 여기에 추가 -->
   </section>
 
   <footer>
-    &copy; made by 연수구 청소년 수련관 / 동아리 청소년 의회'US'
+    &copy; made by 연수구 청소년 수련관 / 동아리 청소년 의회 'US'
   </footer>
+
+  <script>
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
 </body>
 </html>
