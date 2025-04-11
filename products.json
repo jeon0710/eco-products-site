@@ -26,12 +26,5 @@
     "description": "재생 용지로 만들어진 환경을 생각한 노트",
     "category": "문구류",
     "url": "https://example.com/notebook"
-  },
-  {
-    "id": 5,
-    "name": "천 가방 (에코백)",
-    "description": "일회용 비닐봉투를 대체할 수 있는 재사용 가방",
-    "category": "패션/소품",
-    "url": "https://example.com/ecobag"
   }
 ]

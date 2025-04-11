@@ -10,7 +10,12 @@
 
   <header class="top-bar">
     <h1>🌿 친환경 제품 소개</h1>
-    <input type="text" id="searchInput" placeholder="제품 이름 검색..." />
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="제품 이름 검색..." />
+      <select id="categorySelect">
+        <option value="all">전체 카테고리</option>
+      </select>
+    </div>
   </header>
 
   <nav class="main-nav">
@@ -18,7 +23,7 @@
       <li class="menu-item" tabindex="0">
         사업 소개
         <div class="submenu">
-          <a href="team.html">동아리 소개</a>
+          <a href="#team">동아리 소개</a>
           <a href="#">프로젝트 소개</a>
         </div>
       </li>
@@ -26,7 +31,11 @@
     </ul>
   </nav>
 
+  <!-- 제품 섹션 -->
   <main id="products" class="product-container"></main>
+
+  <!-- 동아리 소개 섹션 (team.html 내용 삽입됨) -->
+  <section id="team" class="team-section" style="display: none;"></section>
 
   <footer>
     &copy; 연수구 청소년 수련관 / 동아리 청소년 의회'US'
