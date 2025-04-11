@@ -1,6 +1,13 @@
+@font-face {
+  font-family: 'GmarketSans';
+  src: url('GmarketSansTTFMedium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'GmarketSans', sans-serif;
     background: #f0fdf4;
     color: #111;
   }
